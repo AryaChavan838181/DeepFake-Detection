@@ -1,0 +1,58 @@
+# Inference Configuration
+
+inference:
+  image_inference:
+    batch_size: 32
+    model_ensemble: true
+    ensemble_weights:
+      efficientnet: 0.33
+      resnet50: 0.33
+      vit: 0.34
+    
+  video_inference:
+    batch_size: 8
+    frame_sampling_rate: 5  # Every 5th frame for faster inference
+    temporal_aggregation: "lstm"  # or "tcn"
+    
+  audio_inference:
+    batch_size: 64
+    spectrogram_params:
+      n_mels: 128
+      n_fft: 2048
+
+# Model paths (relative to project root)
+model_paths:
+  image_efficientnet: "models/checkpoints/efficientnet_b7_v1.h5"
+  image_resnet: "models/checkpoints/resnet50_freq_v1.h5"
+  image_vit: "models/checkpoints/vit_b16_v1.h5"
+  video_3dcnn: "models/checkpoints/3d_cnn_v1.h5"
+  video_lstm: "models/checkpoints/lstm_v1.h5"
+  audio_cnn: "models/checkpoints/audio_cnn_v1.h5"
+  audio_rnn: "models/checkpoints/audio_rnn_v1.h5"
+  noise_net: "models/checkpoints/noise_net_v1.h5"
+
+# Confidence thresholds
+classification_threshold: 0.5  # >= 0.5 = Manipulated
+confidence_low: 0.60  # Low confidence range
+confidence_medium: 0.80  # Medium confidence range
+confidence_high: 1.0  # High confidence range
+
+# Performance constraints
+max_inference_time_seconds: 300  # 5 minutes max
+memory_limit_mb: 2048  # 2GB max memory
+
+# Device selection
+device: "auto"  # "cpu", "gpu", or "auto"
+gpu_memory_fraction: 0.5  # Use 50% of GPU memory
+
+# Output configuration
+output_format: "json"  # json, pdf, both
+include_heatmaps: true
+include_temporal_timeline: true
+include_attention_maps: true
+
+# Reporting
+report_decimals: 2  # Decimal places in reports
+confidence_percentage: true  # Show as percentage (0-100) vs decimal (0-1)
+
+# Last Updated: February 7, 2026

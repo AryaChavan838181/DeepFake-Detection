@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="popup.css">
+    <style>
+        body { width: 400px; padding: 15px; }
+        .report-item { background: #fff; padding: 10px; margin-bottom: 10px; border-left: 4px solid #d32f2f; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+        .report-item img { max-width: 100px; max-height: 100px; display: block; margin-bottom: 5px; }
+        .url-box { font-size: 11px; word-break: break-all; color: #555; background: #eee; padding: 4px; border-radius: 4px;}
+        .hash-box { font-size: 10px; color: #888; margin-top: 5px; }
+        .header { margin-bottom: 15px; }
+    </style>
+    <title>DFDetective Report</title>
+</head>
+<body>
+    <div class="header">
+        <h1 class="logoText">Detailed Threat Report</h1>
+    </div>
+    <div id="reportContainer">
+        <p>Loading flagged items...</p>
+    </div>
+    <button id="clearBtn" class="primary-btn" style="background-color: #d32f2f;">Clear Records</button>
+
+    <script src="report.js"></script>
+</body>
+</html>

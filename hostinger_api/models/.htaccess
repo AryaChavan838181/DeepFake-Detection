@@ -1,0 +1,10 @@
+<IfModule mod_headers.c>
+    Header set Access-Control-Allow-Origin "*"
+    Header set Access-Control-Allow-Methods "GET, OPTIONS"
+    Header set Access-Control-Allow-Headers "Origin, X-Requested-With, Content-Type, Accept, Range"
+    Header set Access-Control-Expose-Headers "Content-Length, Content-Range"
+</IfModule>
+
+<IfModule mod_mime.c>
+    AddType application/octet-stream .onnx
+</IfModule>

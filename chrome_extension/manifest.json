@@ -1,0 +1,40 @@
+{
+  "manifest_version": 3,
+  "name": "DFDetective Real-time Protection",
+  "description": "Scans image, audio, and video content directly in your browser using local GPU to identify deepfakes securely.",
+  "version": "1.0.0",
+  "background": {
+    "service_worker": "background/background.js"
+  },
+  "permissions": [
+    "activeTab",
+    "declarativeNetRequest",
+    "storage",
+    "scripting",
+    "webRequest"
+  ],
+  "host_permissions": [
+    "<all_urls>"
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["lib/*.wasm"],
+      "matches": ["<all_urls>"]
+    }
+  ],
+  "action": {
+    "default_popup": "popup/popup.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["lib/ort.min.js", "utils/hasher.js", "content/content.js"],
+      "run_at": "document_end"
+    }
+  ]
+}

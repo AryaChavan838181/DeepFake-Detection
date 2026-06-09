@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="popup.css">
+    <title>DFDetective</title>
+</head>
+<body>
+    <div class="header">
+        <h1 class="logoText">DFDetective</h1>
+    </div>
+
+    <div class="content">
+        <div class="status-container">
+            <span class="label">Real-time Protection:</span>
+            <label class="switch">
+                <input type="checkbox" id="protectionToggle">
+                <span class="slider"></span>
+            </label>
+        </div>
+
+        <div class="stats">
+            <p>Threats Blocked: <span id="threatCount" class="danger">0</span></p>
+        </div>
+
+        <button id="viewReportBtn" class="primary-btn">View Detailed Report</button>
+    </div>
+
+    <script src="popup.js"></script>
+</body>
+</html>

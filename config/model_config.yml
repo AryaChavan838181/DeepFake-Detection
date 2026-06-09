@@ -1,0 +1,85 @@
+# Model Configuration
+
+image_models:
+  efficientnet_b7:
+    architecture: "EfficientNet-B7"
+    input_size: [226, 226, 3]
+    pre_trained: true
+    pre_training_dataset: "ImageNet"
+    trainable_backbone: false  # Freeze backbone initially
+    dropout_rate: 0.3
+    regularization_l2: 1e-5
+    
+  resnet50_spatial_frequency:
+    architecture: "ResNet-50 with Frequency Branch"
+    input_size: [226, 226, 3]
+    pre_trained: true
+    spatial_branch:
+      dropout_rate: 0.3
+    frequency_branch:
+      fft_type: "FFT"  # or DCT
+      normalizer: "log"
+      dropout_rate: 0.3
+    
+  vision_transformer:
+    architecture: "ViT-B/16"
+    input_size: [226, 226, 3]
+    pre_trained: true
+    pre_training_dataset: "ImageNet-21k"
+    patch_size: 16
+    num_heads: 12
+    dropout_rate: 0.1
+
+video_models:
+  threed_cnn:
+    architecture: "I3D or R3D"
+    input_size: [16, 226, 226, 3]  # 16 frames
+    pre_trained: true
+    pre_training_dataset: "Kinetics-400"
+    temporal_stride: 2
+    dropout_rate: 0.3
+    
+  lstm_aggregation:
+    hidden_units: 256
+    num_layers: 2
+    bidirectional: true
+    dropout_rate: 0.3
+    
+  tcn_aggregation:
+    kernel_size: 3
+    num_filters: 128
+    dilations: [1, 2, 4, 8]
+    dropout_rate: 0.3
+
+audio_models:
+  spectrogram_cnn:
+    input_shape: [128, 300, 1]  # (frequency, time, channels)
+    conv_filters: [32, 64, 128, 256]
+    kernel_sizes: [3, 3, 3, 3]
+    pool_sizes: [2, 2, 2, 2]
+    dropout_rate: 0.3
+    
+  rnn_temporal:
+    architecture: "GRU"  # or LSTM
+    hidden_units: 128
+    num_layers: 2
+    bidirectional: true
+    dropout_rate: 0.2
+
+fusion:
+  strategy: "late_fusion"  # late_fusion, early_fusion, or hybrid
+  image_weight: 0.33
+  video_weight: 0.33
+  audio_weight: 0.34
+  confidence_threshold: 0.5  # Binary classification threshold
+
+noise_net:
+  architecture: "Lightweight CNN"
+  input_size: [226, 226, 3]
+  conv_filters: [64, 128, 256, 128, 64, 3]
+  kernel_size: 3
+  activation: "relu"  # except last layer (tanh)
+  epsilon: 0.01  # Perturbation magnitude bound
+  batch_norm: true
+  
+# Last Updated: February 7, 2026
