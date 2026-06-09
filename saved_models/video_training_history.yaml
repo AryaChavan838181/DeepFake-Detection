@@ -1,0 +1,5 @@
+batch_size: 2
+epochs: 1
+final_auc: 0.375
+final_loss: 0.7491998672485352
+use_lightweight: true
